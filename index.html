@@ -2,178 +2,179 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Malla Ingeniería Civil Industrial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla Civil Industrial UC</title>
   <style>
     body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 30px;
-      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 20px;
     }
-
     h1 {
       text-align: center;
-      color: #003366;
-      margin-bottom: 40px;
     }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-bottom: 30px;
-    }
-
-    .semester {
-      flex: 0 0 48%;
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    #creditos {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
       margin-bottom: 20px;
     }
-
-    .semester h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #004080;
+    .fila {
+      display: flex;
+      margin-bottom: 30px;
+      justify-content: center;
+      gap: 40px;
     }
-
-    .course {
-      margin-bottom: 12px;
+    .columna {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #eaeff5;
+      border-radius: 8px;
+      padding: 10px;
+      width: 240px;
+    }
+    .semestre-titulo {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .curso {
       padding: 10px;
       border-radius: 6px;
-      background: #e8f0ff;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      position: relative;
     }
-
-    .basico { background: #e8f0ff; }
-    .especializada { background: #e0f7fa; }
-    .complementaria { background: #fbe9e7; }
-    .general { background: #fff8e1; }
-
-    .code {
-      font-weight: bold;
+    .curso.aprobado {
+      background-color: #b3e5fc;
     }
-
-    .requisitos {
-      font-style: italic;
-      font-size: 14px;
-      color: #444;
+    .curso.bloqueado {
+      background-color: #f8bbd0;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    .tooltip {
+      visibility: hidden;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+    }
+    .curso:hover .tooltip {
+      visibility: visible;
     }
   </style>
 </head>
 <body>
-  <h1>Malla Ingeniería Civil Industrial</h1>
+  <h1>Malla Civil Industrial UC</h1>
+  <div id="creditos">Créditos aprobados: 0</div>
+  <div id="malla"></div>
 
-  <!-- Comienza la malla aquí -->
-  <div class="row">
-    <div class="semester">
-      <h2>I Semestre</h2>
-      <div class="course basico"><span class="code">MA1001</span> - Introducción al Cálculo (6 cr)<br><span class="requisitos">Sin requisitos</span></div>
-      <div class="course basico"><span class="code">MA1101</span> - Introducción al Álgebra (6 cr)<br><span class="requisitos">Sin requisitos</span></div>
-      <div class="course basico"><span class="code">FI1000</span> - Introducción a la Física Clásica (6 cr)<br><span class="requisitos">Sin requisitos</span></div>
-      <div class="course basico"><span class="code">CC1000</span> - Herramientas Computacionales (3 cr)<br><span class="requisitos">Sin requisitos</span></div>
-      <div class="course basico"><span class="code">CD1100</span> - Desafíos de Innovación (6 cr)<br><span class="requisitos">Sin requisitos</span></div>
-      <div class="course basico"><span class="code">BT1211</span> - Biología Aplicada (3 cr)<br><span class="requisitos">Sin requisitos</span></div>
-    </div>
+  <script>
+    const cursos = [
+      { id: 'MA1001', nombre: 'Intro. al Cálculo', semestre: 1, creditos: 6, prer: [] },
+      { id: 'MA1101', nombre: 'Intro. al Álgebra', semestre: 1, creditos: 6, prer: [] },
+      { id: 'FI1000', nombre: 'Intro. Física Clásica', semestre: 1, creditos: 6, prer: [] },
+      { id: 'CC1000', nombre: 'Herram. Computacionales', semestre: 1, creditos: 3, prer: [] },
+      { id: 'CD1100', nombre: 'Desafíos Innovación', semestre: 1, creditos: 6, prer: [] },
+      { id: 'BT1211', nombre: 'Bio. Aplicada', semestre: 1, creditos: 3, prer: [] },
 
-    <div class="semester">
-      <h2>II Semestre</h2>
-      <div class="course basico"><span class="code">MA1002</span> - Cálculo Diferencial e Integral (6 cr)<br><span class="requisitos">MA1001</span></div>
-      <div class="course basico"><span class="code">MA1102</span> - Álgebra Lineal (6 cr)<br><span class="requisitos">MA1101</span></div>
-      <div class="course basico"><span class="code">FI1100</span> - Física Moderna (6 cr)<br><span class="requisitos">FI1000, MA1001</span></div>
-      <div class="course basico"><span class="code">CC1002</span> - Introducción a la Programación (6 cr)<br><span class="requisitos">Sin requisitos</span></div>
-      <div class="course basico"><span class="code">CD1201</span> - Proyecto de Innovación (3 cr)<br><span class="requisitos">CD1100</span></div>
-      <div class="course complementaria"><span class="code">Formación Integral</span> (3 cr)</div>
-    </div>
-  </div>
+      { id: 'MA1002', nombre: 'Cálculo Dif. e Integral', semestre: 2, creditos: 6, prer: ['MA1001'] },
+      { id: 'MA1102', nombre: 'Álgebra Lineal', semestre: 2, creditos: 6, prer: ['MA1101'] },
+      { id: 'FI1100', nombre: 'Física Moderna', semestre: 2, creditos: 6, prer: ['FI1000'] },
+      { id: 'CC1002', nombre: 'Intro. a Programación', semestre: 2, creditos: 6, prer: ['CC1000'] },
+      { id: 'CD1201', nombre: 'Proyecto de Innovación', semestre: 2, creditos: 3, prer: ['CD1100'] },
+      { id: 'FG1', nombre: 'Formación General I', semestre: 2, creditos: 3, prer: [] },
 
-  <div class="row">
-    <div class="semester">
-      <h2>III Semestre</h2>
-      <div class="course basico"><span class="code">MA2001</span> - Cálculo en Varias Variables (6 cr)<br><span class="requisitos">MA1002</span></div>
-      <div class="course basico"><span class="code">MA2601</span> - Ecuaciones Diferenciales Ordinarias (6 cr)<br><span class="requisitos">MA1002, MA1102</span></div>
-      <div class="course basico"><span class="code">FI2001</span> - Mecánica (6 cr)<br><span class="requisitos">FI1100, MA1001, MA1102</span></div>
-      <div class="course basico"><span class="code">FI2003</span> - Métodos Experimentales (6 cr)<br><span class="requisitos">FI1100, MA1002</span></div>
-      <div class="course basico"><span class="code">IQ2211</span> - Química (6 cr)<br><span class="requisitos">Sin requisitos</span></div>
-    </div>
+      { id: 'MA2001', nombre: 'Cálculo en Varias Vars.', semestre: 3, creditos: 6, prer: ['MA1002'] },
+      { id: 'MA2601', nombre: 'Ecuaciones Dif. Ordinarias', semestre: 3, creditos: 6, prer: ['MA1002'] },
+      { id: 'FI2003', nombre: 'Métodos Experimentales', semestre: 3, creditos: 6, prer: ['FI1100'] },
+      { id: 'FI2001', nombre: 'Mecánica', semestre: 3, creditos: 6, prer: ['FI1000'] },
+      { id: 'IQ2211', nombre: 'Química', semestre: 3, creditos: 6, prer: [] },
 
-    <div class="semester">
-      <h2>IV Semestre</h2>
-      <div class="course basico"><span class="code">IN2201</span> - Economía (6 cr)<br><span class="requisitos">MA2001</span></div>
-      <div class="course basico"><span class="code">MA2002</span> - Cálculo Avanzado y Aplicaciones (6 cr)<br><span class="requisitos">MA2001, MA2601</span></div>
-      <div class="course basico"><span class="code">FI2002</span> - Electromagnetismo (6 cr)<br><span class="requisitos">MA2001, MA2601, FI2003</span></div>
-      <div class="course basico"><span class="code">FI2004/IQ2212</span> - Termodinámica (6 cr)<br><span class="requisitos">IQ2211, FI2001, MA2001</span></div>
-      <div class="course general"><span class="code">CD2201</span> - Módulo Interdisciplinario (3 cr)<br><span class="requisitos">CD1201</span></div>
-      <div class="course complementaria"><span class="code">Formación Integral</span> (3 cr)</div>
-    </div>
-  </div>
+      { id: 'IN2201', nombre: 'Economía', semestre: 4, creditos: 6, prer: [] },
+      { id: 'MA2002', nombre: 'Cálculo Avanzado', semestre: 4, creditos: 6, prer: ['MA2001'] },
+      { id: 'FI2002', nombre: 'Electromagnetismo', semestre: 4, creditos: 6, prer: ['FI2001'] },
+      { id: 'FI2004', nombre: 'Termodinámica', semestre: 4, creditos: 6, prer: ['FI1100'] },
+      { id: 'CD2201', nombre: 'Módulo Interdisciplinario', semestre: 4, creditos: 3, prer: ['CD1201'] },
+      { id: 'FG2', nombre: 'Formación General II', semestre: 4, creditos: 3, prer: [] },
 
-  <div class="row">
-    <div class="semester">
-      <h2>V Semestre</h2>
-      <div class="course especializada"><span class="code">IN3171</span> - Modelamiento y Optimización (6 cr)<br><span class="requisitos">MA2002</span></div>
-      <div class="course especializada"><span class="code">IN3101</span> - Taller Liderazgo e Innovación Social (6 cr)<br><span class="requisitos">CD2201</span></div>
-      <div class="course especializada"><span class="code">IN3141</span> - Probabilidades (6 cr)<br><span class="requisitos">MA2001</span></div>
-      <div class="course especializada"><span class="code">Electivo</span> (6 cr)</div>
-      <div class="course complementaria"><span class="code">Formación Integral</span> (6 cr)</div>
-    </div>
+      // Agrega aquí los cursos del 5° semestre en adelante
+    ];
 
-    <div class="semester">
-      <h2>VI Semestre</h2>
-      <div class="course especializada"><span class="code">IN3272</span> - Decisiones bajo Incertidumbre (6 cr)<br><span class="requisitos">IN3141, IN3171</span></div>
-      <div class="course especializada"><span class="code">IN3221</span> - Teoría de Juegos (6 cr)<br><span class="requisitos">IN3141, IN2201</span></div>
-      <div class="course especializada"><span class="code">IN3242</span> - Estadística (6 cr)<br><span class="requisitos">IN3141</span></div>
-      <div class="course especializada"><span class="code">IN3301</span> - Evaluación de Proyectos (6 cr)<br><span class="requisitos">IN2201, IN3141</span></div>
-      <div class="course especializada"><span class="code">Electivo</span> (6 cr)</div>
-    </div>
-  </div>
+    let aprobados = JSON.parse(localStorage.getItem('aprobados')) || [];
 
-  <div class="row">
-    <div class="semester">
-      <h2>VII Semestre</h2>
-      <div class="course especializada"><span class="code">IN4102</span> - Taller de Diseño de Proyectos (6 cr)<br><span class="requisitos">IN3171, IN3101</span></div>
-      <div class="course especializada"><span class="code">IN4123</span> - Macroeconomía (6 cr)<br><span class="requisitos">IN2201, IN3141</span></div>
-      <div class="course especializada"><span class="code">IN4143</span> - Análisis de Datos (6 cr)<br><span class="requisitos">IN3242</span></div>
-      <div class="course especializada"><span class="code">IN4151</span> - Ingeniería de la Información (6 cr)<br><span class="requisitos">CC1002, IN3301, IN3242</span></div>
-      <div class="course especializada"><span class="code">IN4191</span> - Práctica Profesional (7 cr)<br><span class="requisitos">IN3272, IN4102</span></div>
-      <div class="course especializada"><span class="code">Electivo</span> (6 cr)</div>
-    </div>
+    function actualizarCreditos() {
+      let total = cursos.filter(c => aprobados.includes(c.id)).reduce((sum, c) => sum + c.creditos, 0);
+      document.getElementById('creditos').textContent = `Créditos aprobados: ${total}`;
+    }
 
-    <div class="semester">
-      <h2>VIII Semestre</h2>
-      <div class="course especializada"><span class="code">IN4273</span> - Gestión de Operaciones (6 cr)<br><span class="requisitos">IN3171, IN3242</span></div>
-      <div class="course especializada"><span class="code">IN4261</span> - Marketing (6 cr)<br><span class="requisitos">IN3171, IN3242, IN3301</span></div>
-      <div class="course especializada"><span class="code">IN4232</span> - Finanzas (6 cr)<br><span class="requisitos">IN3301</span></div>
-      <div class="course especializada"><span class="code">Electivo</span> (12 cr)</div>
-      <div class="course complementaria"><span class="code">EI1090</span> - Examen de Inglés I</div>
-    </div>
-  </div>
+    function crearMalla() {
+      const malla = document.getElementById('malla');
+      malla.innerHTML = '';
 
-  <div class="row">
-    <div class="semester">
-      <h2>IX Semestre</h2>
-      <div class="course especializada"><span class="code">IN5112</span> - Dirección Estratégica (6 cr)<br><span class="requisitos">IN4273, IN4261, IN4232</span></div>
-      <div class="course especializada"><span class="code">IN5111</span> - Comportamiento Organizacional (6 cr)<br><span class="requisitos">IN4191</span></div>
-      <div class="course especializada"><span class="code">Especialización</span> (12 cr)</div>
-      <div class="course especializada"><span class="code">Electivo de Especialidad</span> (6 cr)</div>
-    </div>
+      const semestres = Math.max(...cursos.map(c => c.semestre));
+      for (let fila = 1; fila <= semestres; fila += 2) {
+        const filaDiv = document.createElement('div');
+        filaDiv.className = 'fila';
 
-    <div class="semester">
-      <h2>X Semestre</h2>
-      <div class="course especializada"><span class="code">Especialización</span> (12 cr)</div>
-      <div class="course especializada"><span class="code">Electivos de Especialidad</span> (18 cr)</div>
-    </div>
-  </div>
+        for (let col = fila; col < fila + 2; col++) {
+          const colDiv = document.createElement('div');
+          colDiv.className = 'columna';
+          const titulo = document.createElement('div');
+          titulo.className = 'semestre-titulo';
+          titulo.textContent = `Semestre ${col}`;
+          colDiv.appendChild(titulo);
 
-  <div class="row">
-    <div class="semester">
-      <h2>XI Semestre</h2>
-      <div class="course especializada"><span class="code">IN6193</span> - Proyecto de Título (15 cr)<br><span class="requisitos">CR3000</span></div>
-      <div class="course especializada"><span class="code">IN6192</span> - Práctica Profesional Extendida (15 cr)<br><span class="requisitos">IN5112, IN5111, IN4191</span></div>
-      <div class="course complementaria"><span class="code">EI2090</span> - Examen de Inglés II</div>
-    </div>
-  </div>
+          cursos.filter(c => c.semestre === col).forEach(curso => {
+            const cursoDiv = document.createElement('div');
+            cursoDiv.className = 'curso';
+            cursoDiv.textContent = `${curso.nombre} (${curso.creditos} cr)`;
 
+            const faltan = curso.prer.filter(p => !aprobados.includes(p));
+            if (faltan.length) {
+              cursoDiv.classList.add('bloqueado');
+              const tip = document.createElement('div');
+              tip.className = 'tooltip';
+              tip.textContent = `Requiere: ${faltan.join(', ')}`;
+              cursoDiv.appendChild(tip);
+            } else {
+              cursoDiv.onclick = () => {
+                if (aprobados.includes(curso.id)) {
+                  aprobados = aprobados.filter(id => id !== curso.id);
+                  localStorage.setItem('aprobados', JSON.stringify(aprobados));
+                } else {
+                  aprobados.push(curso.id);
+                  localStorage.setItem('aprobados', JSON.stringify(aprobados));
+                }
+                crearMalla();
+                actualizarCreditos();
+              };
+              if (aprobados.includes(curso.id)) cursoDiv.classList.add('aprobado');
+            }
+
+            colDiv.appendChild(cursoDiv);
+          });
+
+          filaDiv.appendChild(colDiv);
+        }
+
+        malla.appendChild(filaDiv);
+      }
+    }
+
+    crearMalla();
+    actualizarCreditos();
+  </script>
 </body>
 </html>
+
